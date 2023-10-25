@@ -7,5 +7,9 @@ export function CreateVideoButton() {
     createNewVideo();
   }
 
-  return <button onClick={handleOnClick}>Create new video</button>;
+  return (
+    <button onClick={handleOnClick} className="btn btn-primary">
+      Create new video
+    </button>
+  );
 }
