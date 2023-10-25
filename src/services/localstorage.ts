@@ -12,14 +12,14 @@ export class LocalStorageService {
     localStorage.removeItem(key);
   }
 
-  static getAllWithPrefix(prefix: string) {
+  static getAllWithPrefix(prefix: string): any[] {
     const items = { ...localStorage };
     const filteredItems = Object.keys(items)
       .filter((key) => key.startsWith(prefix))
-      .reduce((obj: any, key: any) => {
-        obj[key] = items[key];
-        return obj;
-      }, {});
+      .reduce((acc: any, key: any) => {
+        acc.push(JSON.parse(items[key]));
+        return acc;
+      }, []);
     return filteredItems;
   }
 }

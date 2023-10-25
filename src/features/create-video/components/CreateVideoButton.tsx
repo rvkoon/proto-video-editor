@@ -1,8 +1,9 @@
 "use client";
 
-import { createNewVideo } from "../services/createNewVideo";
+import { useCreateNewVideo } from "../services/useCreateNewVideo";
 
 export function CreateVideoButton() {
+  const { createNewVideo } = useCreateNewVideo();
   function handleOnClick() {
     createNewVideo();
   }

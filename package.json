@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.10",
     "@types/uuid": "^9.0.6",
     "daisyui": "^3.9.3",
     "next": "13.5.6",
