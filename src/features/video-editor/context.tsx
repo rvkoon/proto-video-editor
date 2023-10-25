@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { VideoEditorContextType, VideoState } from "./types";
 
 const VideoEditorContext = createContext<VideoEditorContextType>({
@@ -9,7 +9,7 @@ const VideoEditorContext = createContext<VideoEditorContextType>({
 });
 
 export function useVideoEditorContext() {
-  return VideoEditorContext;
+  return useContext(VideoEditorContext);
 }
 
 interface VideoEditorContextProviderProps {
