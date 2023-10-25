@@ -7,8 +7,8 @@ export const DEFAULT_VIDEO_STATE: VideoState = {
     description: "",
     frames: 48,
     size: {
-      width: 1080,
-      height: 1920,
+      width: 270,
+      height: 480,
     },
     currentFrame: 0,
   },

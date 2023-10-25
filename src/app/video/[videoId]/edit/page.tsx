@@ -1,7 +1,7 @@
 "use client";
+import { CanvasEditor } from "@/features/video-editor/components/CanvasEditor";
 import { useVideoEditorContext } from "@/features/video-editor/context";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 export default function EditVideo() {
   const { videoState, isLoadingVideo } = useVideoEditorContext();
@@ -21,5 +21,15 @@ export default function EditVideo() {
     );
   }
 
-  return <div>{videoState?.settings.id}</div>;
+  return (
+    <div className="flex gap-5">
+      <div className="flex-1 flex justify-center p-5 border rounded-xl">
+        <CanvasEditor />
+      </div>
+      <div className="flex-1 p-5 border rounded-xl">
+        <p className="text-[56px] font-black">{videoState.settings.title}</p>
+        <p>{videoState.settings.description}</p>
+      </div>
+    </div>
+  );
 }
