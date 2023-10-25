@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, useState } from "react";
 import { VideoEditorContextType, VideoState } from "./types";
 
@@ -14,7 +16,7 @@ interface VideoEditorContextProviderProps {
   children: React.ReactNode;
 }
 
-export function useVideoEditorContextProvider({
+export function VideoEditorProvider({
   children,
 }: VideoEditorContextProviderProps) {
   const [videoState, setVideoState] = useState<VideoState | null>(null);
