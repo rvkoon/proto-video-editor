@@ -7,14 +7,23 @@ import { useAppContext } from "@/app/context";
 export function useCreateNewVideo() {
   const { videos, setVideos } = useAppContext();
 
-  function createNewVideo(): VideoState {
+  function createNewVideo({
+    title,
+    description,
+  }: {
+    title: string;
+    description: string;
+  }): VideoState {
     const videoId = uuidv4();
     const video = {
       ...DEFAULT_VIDEO_STATE,
-      settings: { ...DEFAULT_VIDEO_STATE.settings, id: videoId },
+      settings: {
+        ...DEFAULT_VIDEO_STATE.settings,
+        id: videoId,
+        title,
+        description,
+      },
     } as VideoState;
-
-    console.log({ videos });
 
     LocalStorageService.set(`video-${videoId}`, video);
     setVideos([...videos, video]);
