@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { useCreateNewVideo } from "../services/useCreateNewVideo";
-import cx from "classnames";
+import { Stepper } from "./Stepper";
 
 export function CreateVideoButton() {
   const { createNewVideo } = useCreateNewVideo();
@@ -35,25 +35,13 @@ export function CreateVideoButton() {
       </button>
       <dialog ref={modalRef} className="modal">
         <div className="modal-box">
-          <ul className="steps my-10">
-            <li
-              data-content={step === 0 ? "●" : "✓"}
-              className={cx("step", step >= 0 && "step-primary")}
-            >
-              Title
-            </li>
-            <li
-              data-content={step === 1 ? "●" : ""}
-              className={cx("step", step === 1 && "step-primary")}
-            >
-              Description
-            </li>
-          </ul>
           <form method="dialog">
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
               ✕
             </button>
           </form>
+
+          <Stepper step={step} />
 
           {step === 0 && (
             <>
