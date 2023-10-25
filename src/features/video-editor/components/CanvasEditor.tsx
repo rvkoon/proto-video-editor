@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useVideoEditorContext } from "../context";
+import { PlayerBar } from "./PlayerBar";
 
 export function CanvasEditor() {
   const { videoState } = useVideoEditorContext();
@@ -27,5 +28,10 @@ export function CanvasEditor() {
     render();
   }, []);
 
-  return <canvas ref={canvasRef}></canvas>;
+  return (
+    <div className="flex flex-col gap-4">
+      <canvas ref={canvasRef}></canvas>
+      <PlayerBar />
+    </div>
+  );
 }
