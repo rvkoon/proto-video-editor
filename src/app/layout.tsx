@@ -20,9 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="light">
       <body className={inter.className}>
-        <AppProvider>
-          <VideoEditorProvider>{children}</VideoEditorProvider>
-        </AppProvider>
+        <AppProvider>{children}</AppProvider>
       </body>
     </html>
   );

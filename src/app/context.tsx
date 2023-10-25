@@ -24,7 +24,6 @@ export function AppProvider({ children }: AppContextProviderProps) {
 
   useEffect(() => {
     const videos = LocalStorageService.getAllWithPrefix("video");
-    console.log({ storageVideos: videos });
     setVideos(videos);
     setIsLoadingVideos(false);
   }, []);

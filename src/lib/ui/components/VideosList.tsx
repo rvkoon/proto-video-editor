@@ -1,5 +1,6 @@
 "use client";
 import { useAppContext } from "@/app/context";
+import Link from "next/link";
 
 export function VideosList() {
   const { isLoadingVideos, videos } = useAppContext();
@@ -11,7 +12,9 @@ export function VideosList() {
       {!isLoadingVideos &&
         videos.length &&
         videos.map((video, index) => (
-          <div key={index}>{video.settings.id}</div>
+          <Link key={index} href={`/video/${video.settings.id}/edit`}>
+            {video.settings.id}
+          </Link>
         ))}
     </div>
   );

@@ -35,4 +35,5 @@ export type VideoState = {
 export type VideoEditorContextType = {
   videoState: VideoState | null;
   setVideoState: React.Dispatch<React.SetStateAction<VideoState | null>>;
+  isLoadingVideo: boolean;
 };
