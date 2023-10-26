@@ -17,7 +17,6 @@ export type VideoLayer = {
   id: string;
   type: VideoLayerType;
   source: string;
-  frames: number;
   position: {
     x: number;
     y: number;

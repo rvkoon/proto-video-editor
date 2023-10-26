@@ -10,21 +10,26 @@ export function useAddLayer() {
     (type: VideoLayerType) => {
       if (videoState) {
         const uuid = uuidv4();
+        const { currentFrame, frames } = videoState.settings;
         const newLayer = {
           ...DEFAULT_VIDEO_LAYER,
           id: uuid,
           type,
+          start: currentFrame,
+          end: frames,
         };
 
-        setVideoState((prevState) => {
-          if (prevState) {
-            return {
-              ...prevState,
-              layers: [...prevState.layers, newLayer],
-            };
-          }
-          return prevState;
-        });
+        const newVideoState = {
+          ...videoState,
+          layers: [...videoState.layers, newLayer],
+        };
+
+        setVideoState(newVideoState);
+
+        localStorage.setItem(
+          `video-${videoState.settings.id}`,
+          JSON.stringify(newVideoState)
+        );
       }
     },
     [videoState, setVideoState]

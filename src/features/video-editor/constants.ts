@@ -3,7 +3,6 @@ export const DEFAULT_VIDEO_LAYER = {
   id: "",
   type: "object",
   source: "",
-  frames: 0,
   position: {
     x: 0,
     y: 0,
