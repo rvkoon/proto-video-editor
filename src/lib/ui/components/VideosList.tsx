@@ -8,7 +8,9 @@ export function VideosList() {
   return (
     <div className="w-full min-h-[30vh] border border-primary/20 rounded-xl p-4">
       {isLoadingVideos && (
-        <span className="loading loading-ring loading-lg"></span>
+        <div className="w-full min-h-[30vh] flex justify-center items-center">
+          <div className="loading loading-ring loading-lg"></div>
+        </div>
       )}
       {!isLoadingVideos && videos.length === 0 && <p>No videos for now</p>}
       {!isLoadingVideos && videos.length > 0 && (

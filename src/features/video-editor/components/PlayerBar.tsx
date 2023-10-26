@@ -1,8 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Play, Pause, Rewind } from "react-feather";
 import { useVideoEditorContext } from "../context";
+import cx from "classnames";
 
-export function PlayerBar() {
+interface PlayerBarProps {
+  style?: "compact" | "inline";
+}
+
+export function PlayerBar({ style = "compact" }: PlayerBarProps) {
   const { videoState, setVideoState, isLoadingVideo } = useVideoEditorContext();
   const [max, setMax] = useState<number>(0);
   const currentFrameLocalRef = useRef<number>(0);
@@ -83,21 +88,31 @@ export function PlayerBar() {
   }
 
   if (isLoadingVideo)
-    return <span className="loading loading-ring loading-lg"></span>;
+    return (
+      <div className="w-full h-full flex justify-center items-center">
+        <div className="loading loading-ring loading-lg"></div>
+      </div>
+    );
 
   if (!videoState) return <div>Video not found</div>;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div
+      className={cx(
+        "flex gap-4",
+        style === "compact" && "flex-col",
+        style === "inline" && "flex-row items-center"
+      )}
+    >
       <input
         type="range"
         min={0}
         max={max}
-        value={currentFrameLocalRef.current}
+        value={videoState.settings.currentFrame}
         className="range range-primary transition-all"
         onChange={handleSetCurrentFrame}
       />
-      <div className="flex gap-4">
+      <div className={cx("flex gap-4", style === "inline" && "h-full")}>
         {isPlaying && !isEnded && (
           <button className="btn flex-1" onClick={pause}>
             <Pause />
@@ -113,7 +128,7 @@ export function PlayerBar() {
             <Rewind />
           </button>
         )}
-        <div className="w-24 flex justify-center items-center border rounded-lg h-full">
+        <div className="w-24 flex justify-center items-center border rounded-lg">
           {displayTime}
         </div>
       </div>
