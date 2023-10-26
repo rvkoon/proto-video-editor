@@ -8,11 +8,14 @@ export type VideoSettings = {
     height: number;
   };
   currentFrame: number;
+  fps: number;
+  isPlaying: boolean;
+  isEnded: boolean;
 };
 
 export type VideoLayer = {
   id: string;
-  type: string;
+  type: VideoLayerType;
   source: string;
   frames: number;
   position: {
@@ -37,3 +40,7 @@ export type VideoEditorContextType = {
   setVideoState: React.Dispatch<React.SetStateAction<VideoState | null>>;
   isLoadingVideo: boolean;
 };
+
+export enum VideoLayerType {
+  OBJECT = "object",
+}

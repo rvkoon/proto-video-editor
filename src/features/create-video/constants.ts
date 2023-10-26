@@ -11,6 +11,9 @@ export const DEFAULT_VIDEO_STATE: VideoState = {
       height: 480,
     },
     currentFrame: 0,
+    fps: 24,
+    isPlaying: false,
+    isEnded: false,
   },
   layers: [],
 };

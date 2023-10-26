@@ -1,4 +1,5 @@
 "use client";
+import { AddLayerButton } from "@/features/video-editor/components/AddLayerButton";
 import { CanvasEditor } from "@/features/video-editor/components/CanvasEditor";
 import { PlayerBar } from "@/features/video-editor/components/PlayerBar";
 import { useVideoEditorContext } from "@/features/video-editor/context";
@@ -45,6 +46,7 @@ export default function EditVideo() {
           <div className="my-5">
             <PlayerBar style="inline" />
           </div>
+          <AddLayerButton classes={{ button: "w-full" }} />
         </div>
       </div>
     </div>
