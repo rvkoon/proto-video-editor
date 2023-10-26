@@ -112,7 +112,7 @@ export function PlayerBar({ style = "compact" }: PlayerBarProps) {
         className="range range-primary transition-all"
         onChange={handleSetCurrentFrame}
       />
-      <div className={cx("flex gap-4", style === "inline" && "h-full")}>
+      <div className={cx("flex gap-4 w-80", style === "inline" && "h-full")}>
         {isPlaying && !isEnded && (
           <button className="btn flex-1" onClick={pause}>
             <Pause />
@@ -128,7 +128,7 @@ export function PlayerBar({ style = "compact" }: PlayerBarProps) {
             <Rewind />
           </button>
         )}
-        <div className="w-24 flex justify-center items-center border rounded-lg">
+        <div className="flex-1 flex justify-center items-center border rounded-lg">
           {displayTime}
         </div>
       </div>
