@@ -22,11 +22,11 @@ export default function EditVideo() {
   }
 
   return (
-    <div className="flex gap-5">
-      <div className="flex-1 flex justify-center p-5 border rounded-xl">
+    <div className="flex gap-5 p-5">
+      <div className="flex-1 flex justify-center p-5 border-2 rounded-xl">
         <CanvasEditor />
       </div>
-      <div className="flex-1 p-5 border rounded-xl">
+      <div className="flex-1 p-5 border-2 rounded-xl">
         <p className="text-[56px] font-black">{videoState.settings.title}</p>
         <p>{videoState.settings.description}</p>
       </div>

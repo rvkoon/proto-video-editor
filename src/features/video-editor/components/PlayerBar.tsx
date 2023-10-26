@@ -78,6 +78,7 @@ export function PlayerBar() {
       }, 1000 / fps);
     } else {
       setIsEnded(true);
+      setIsPlaying(false);
     }
   }
 
@@ -87,7 +88,7 @@ export function PlayerBar() {
   if (!videoState) return <div>Video not found</div>;
 
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex flex-col gap-4">
       <input
         type="range"
         min={0}
@@ -96,23 +97,25 @@ export function PlayerBar() {
         className="range range-primary transition-all"
         onChange={handleSetCurrentFrame}
       />
-      {isPlaying && !isEnded && (
-        <button className="btn btn-square" onClick={pause}>
-          <Pause />
-        </button>
-      )}
-      {!isPlaying && !isEnded && (
-        <button className="btn btn-square" onClick={play}>
-          <Play />
-        </button>
-      )}
-      {isEnded && (
-        <button className="btn btn-square" onClick={rewind}>
-          <Rewind />
-        </button>
-      )}
-      <div className="w-24 flex justify-center items-center border rounded-lg h-full">
-        {displayTime}
+      <div className="flex gap-4">
+        {isPlaying && !isEnded && (
+          <button className="btn flex-1" onClick={pause}>
+            <Pause />
+          </button>
+        )}
+        {!isPlaying && !isEnded && (
+          <button className="btn flex-1" onClick={play}>
+            <Play />
+          </button>
+        )}
+        {isEnded && (
+          <button className="btn flex-1" onClick={rewind}>
+            <Rewind />
+          </button>
+        )}
+        <div className="w-24 flex justify-center items-center border rounded-lg h-full">
+          {displayTime}
+        </div>
       </div>
     </div>
   );
