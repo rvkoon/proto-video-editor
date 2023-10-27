@@ -2,7 +2,7 @@ export const LAYER_TYPES = ["object"];
 export const DEFAULT_VIDEO_LAYER = {
   id: "",
   type: "object",
-  source: "",
+  image: null,
   position: {
     x: 20,
     y: 20,

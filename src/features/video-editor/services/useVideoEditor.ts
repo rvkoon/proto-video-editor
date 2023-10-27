@@ -2,7 +2,7 @@ import { LocalStorageService } from "@/services/localstorage";
 import { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { DEFAULT_VIDEO_LAYER } from "../constants";
-import { VideoLayerType, VideoState } from "../types";
+import { VideoLayer, VideoLayerType, VideoState } from "../types";
 
 export function useVideoEditor(videoId: string) {
   const [videoState, setVideoState] = useState<VideoState | null>(null);
@@ -14,6 +14,11 @@ export function useVideoEditor(videoId: string) {
     setVideoState(video);
     setIsLoadingVideo(false);
   }, []);
+
+  useEffect(() => {
+    if (!videoState) return;
+    drawCanvas();
+  }, [videoState?.settings.currentFrame]);
 
   function _updateStorage(nextVideoState: VideoState) {
     LocalStorageService.set(`video-${videoId}`, nextVideoState);
@@ -79,17 +84,39 @@ export function useVideoEditor(videoId: string) {
     if (!videoState) return;
 
     const newLayers = videoState.layers.filter((layer) => layer.id !== layerId);
-    console.log(newLayers);
 
     const nextVideoState = {
       ...videoState,
       layers: newLayers,
     };
 
-    console.log(nextVideoState);
-
     setVideoState(nextVideoState);
     _updateStorage(nextVideoState);
+  }
+
+  function drawCanvas() {
+    if (!canvasRef.current || !videoState) return;
+    const {
+      settings: {
+        size: { width, height },
+        currentFrame,
+      },
+      layers,
+    } = videoState;
+    const ctx = canvasRef.current.getContext("2d")!;
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = "#000";
+    ctx.fillRect(0, 0, width, height);
+
+    const currentLayers = layers.filter(
+      (layer) => currentFrame >= layer.start && currentFrame <= layer.end
+    );
+
+    currentLayers.forEach((layer) => {
+      const { position, size } = layer;
+      ctx.fillStyle = "red";
+      ctx.fillRect(position.x, position.y, size.width, size.height);
+    });
   }
 
   return {

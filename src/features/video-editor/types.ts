@@ -17,7 +17,7 @@ export type VideoSettings = {
 export type VideoLayer = {
   id: string;
   type: VideoLayerType;
-  source: string;
+  image: any;
   position: {
     x: number;
     y: number;
