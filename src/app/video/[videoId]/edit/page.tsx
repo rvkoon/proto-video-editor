@@ -54,9 +54,13 @@ export default function EditVideo() {
           </div>
           <div className="divider"></div>
           <div className="my-5 flex flex-col gap-2">
-            {videoState.layers.map((layer) => (
-              <LayerBar key={layer.id} layer={layer} />
-            ))}
+            {videoState.layers.length > 0 ? (
+              videoState.layers.map((layer) => (
+                <LayerBar key={layer.id} layer={layer} />
+              ))
+            ) : (
+              <p>No video layers</p>
+            )}
           </div>
           <div className="divider"></div>
           <AddLayerButton classes={{ button: "w-full mt-2" }} />

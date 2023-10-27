@@ -4,12 +4,12 @@ export const DEFAULT_VIDEO_LAYER = {
   type: "object",
   source: "",
   position: {
-    x: 0,
-    y: 0,
+    x: 20,
+    y: 20,
   },
   size: {
-    width: 0,
-    height: 0,
+    width: 100,
+    height: 100,
   },
   start: 0,
   end: 0,
