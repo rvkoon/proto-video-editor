@@ -5,10 +5,15 @@ import { LayerBar } from "@/features/video-editor/components/LayerBar/LayerBar";
 import { PlayerBar } from "@/features/video-editor/components/PlayerBar";
 import { useVideoEditorContext } from "@/features/video-editor/context";
 import Link from "next/link";
+import { useEffect } from "react";
 import { Home } from "react-feather";
 
 export default function EditVideo() {
   const { videoState, isLoadingVideo } = useVideoEditorContext();
+
+  useEffect(() => {
+    console.log(videoState);
+  }, [videoState]);
 
   if (isLoadingVideo) {
     return (
@@ -48,7 +53,7 @@ export default function EditVideo() {
             <PlayerBar style="inline" />
           </div>
           <div className="divider"></div>
-          <div className="my-5">
+          <div className="my-5 flex flex-col gap-2">
             {videoState.layers.map((layer) => (
               <LayerBar key={layer.id} layer={layer} />
             ))}

@@ -11,6 +11,7 @@ const VideoEditorContext = createContext<VideoEditorContextType>({
   setSelectedLayer: () => {},
   addLayer: () => {},
   setLayerStartEnd: () => {},
+  deleteLayer: () => {},
 });
 
 export function useVideoEditorContext() {

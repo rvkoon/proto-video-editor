@@ -42,6 +42,7 @@ export type VideoEditorContextType = {
   setSelectedLayer: (layerId: string) => void;
   addLayer: (type: VideoLayerType) => void;
   setLayerStartEnd: (layerId: string, startEnd: [number, number]) => void;
+  deleteLayer: (layerId: string) => void;
 };
 
 export enum VideoLayerType {

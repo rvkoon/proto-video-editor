@@ -7,13 +7,15 @@ import "./LayerBar.css";
 import cx from "classnames";
 import { VideoLayer } from "../../types";
 import { useVideoEditorContext } from "../../context";
+import { Trash2 } from "react-feather";
 
 interface LayerBarProps {
   layer: VideoLayer;
 }
 
 export function LayerBar({ layer }: LayerBarProps) {
-  const { setSelectedLayer, setLayerStartEnd } = useVideoEditorContext();
+  const { setSelectedLayer, setLayerStartEnd, deleteLayer } =
+    useVideoEditorContext();
 
   const [value, setValue] = useState<[number, number]>([
     layer.start,
@@ -31,15 +33,18 @@ export function LayerBar({ layer }: LayerBarProps) {
   }, [value]);
 
   function handleChangeValue([start, end]: [number, number]) {
-    console.log(start, end);
     setValue([start, end]);
     setLayerStartEnd(layer.id, [start, end]);
+  }
+
+  function handleDeleteLayer() {
+    deleteLayer(layer.id);
   }
 
   return (
     <div
       className={cx("h-[50px] flex items-center gap-4")}
-      onClick={() => setSelectedLayer(layer.id)}
+      // onClick={() => setSelectedLayer(layer.id)}
     >
       <RangeSlider
         min={0}
@@ -55,6 +60,12 @@ export function LayerBar({ layer }: LayerBarProps) {
         <div className="flex-1 flex justify-center items-center border rounded-lg">
           {endDisplayTime}
         </div>
+        <button
+          className="btn btn-square !bg-white border border-error hover:border-error hover:border-2"
+          onClick={handleDeleteLayer}
+        >
+          <Trash2 className="text-error" />
+        </button>
       </div>
     </div>
   );

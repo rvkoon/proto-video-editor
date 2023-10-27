@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
-import { VideoLayerType, VideoState } from "../types";
 import { LocalStorageService } from "@/services/localstorage";
-import { DEFAULT_VIDEO_LAYER } from "../constants";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { DEFAULT_VIDEO_LAYER } from "../constants";
+import { VideoLayerType, VideoState } from "../types";
 
 export function useVideoEditor(videoId: string) {
   const [videoState, setVideoState] = useState<VideoState | null>(null);
@@ -74,6 +74,23 @@ export function useVideoEditor(videoId: string) {
     _updateStorage(nextVideoState);
   }
 
+  function deleteLayer(layerId: string) {
+    if (!videoState) return;
+
+    const newLayers = videoState.layers.filter((layer) => layer.id !== layerId);
+    console.log(newLayers);
+
+    const nextVideoState = {
+      ...videoState,
+      layers: newLayers,
+    };
+
+    console.log(nextVideoState);
+
+    setVideoState(nextVideoState);
+    _updateStorage(nextVideoState);
+  }
+
   return {
     videoState,
     setVideoState,
@@ -81,5 +98,6 @@ export function useVideoEditor(videoId: string) {
     setSelectedLayer,
     addLayer,
     setLayerStartEnd,
+    deleteLayer,
   };
 }
