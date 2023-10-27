@@ -39,6 +39,9 @@ export type VideoEditorContextType = {
   videoState: VideoState | null;
   setVideoState: React.Dispatch<React.SetStateAction<VideoState | null>>;
   isLoadingVideo: boolean;
+  setSelectedLayer: (layerId: string) => void;
+  addLayer: (type: VideoLayerType) => void;
+  setLayerStartEnd: (layerId: string, startEnd: [number, number]) => void;
 };
 
 export enum VideoLayerType {

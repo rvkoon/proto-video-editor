@@ -1,13 +1,16 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
-import { VideoEditorContextType, VideoState } from "./types";
-import { LocalStorageService } from "@/services/localstorage";
+import { createContext, useContext } from "react";
+import { useVideoEditor } from "./services/useVideoEditor";
+import { VideoEditorContextType } from "./types";
 
 const VideoEditorContext = createContext<VideoEditorContextType>({
   videoState: null,
   setVideoState: () => {},
   isLoadingVideo: false,
+  setSelectedLayer: () => {},
+  addLayer: () => {},
+  setLayerStartEnd: () => {},
 });
 
 export function useVideoEditorContext() {
@@ -23,19 +26,10 @@ export function VideoEditorProvider({
   children,
   videoId,
 }: VideoEditorContextProviderProps) {
-  const [videoState, setVideoState] = useState<VideoState | null>(null);
-  const [isLoadingVideo, setIsLoadingVideo] = useState<boolean>(true);
-
-  useEffect(() => {
-    const video = LocalStorageService.get(`video-${videoId}`);
-    setVideoState(video);
-    setIsLoadingVideo(false);
-  }, []);
+  const editor = useVideoEditor(videoId);
 
   return (
-    <VideoEditorContext.Provider
-      value={{ videoState, setVideoState, isLoadingVideo }}
-    >
+    <VideoEditorContext.Provider value={editor}>
       {children}
     </VideoEditorContext.Provider>
   );

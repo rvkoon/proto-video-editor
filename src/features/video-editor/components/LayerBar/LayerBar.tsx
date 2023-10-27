@@ -5,14 +5,20 @@ import RangeSlider from "react-range-slider-input";
 import "react-range-slider-input/dist/style.css";
 import "./LayerBar.css";
 import cx from "classnames";
+import { VideoLayer } from "../../types";
+import { useVideoEditorContext } from "../../context";
 
 interface LayerBarProps {
-  isSelected?: boolean;
-  sourceImg?: string;
+  layer: VideoLayer;
 }
 
-export function LayerBar({ isSelected = false, sourceImg }: LayerBarProps) {
-  const [value, setValue] = useState([0, 48]);
+export function LayerBar({ layer }: LayerBarProps) {
+  const { setSelectedLayer, setLayerStartEnd } = useVideoEditorContext();
+
+  const [value, setValue] = useState<[number, number]>([
+    layer.start,
+    layer.end,
+  ]);
   const [startDisplayTime, setStartDisplayTime] = useState<string>("0:0");
   const [endDisplayTime, setEndDisplayTime] = useState<string>("0:0");
 
@@ -24,12 +30,21 @@ export function LayerBar({ isSelected = false, sourceImg }: LayerBarProps) {
     setEndDisplayTime(`${seconds2}:${value[1] % 24}`);
   }, [value]);
 
+  function handleChangeValue([start, end]: [number, number]) {
+    console.log(start, end);
+    setValue([start, end]);
+    setLayerStartEnd(layer.id, [start, end]);
+  }
+
   return (
-    <div className={cx("h-[50px] flex items-center gap-4")}>
+    <div
+      className={cx("h-[50px] flex items-center gap-4")}
+      onClick={() => setSelectedLayer(layer.id)}
+    >
       <RangeSlider
         min={0}
         max={48}
-        onInput={setValue}
+        onInput={handleChangeValue}
         value={value}
         id="customSlider"
       />

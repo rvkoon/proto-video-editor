@@ -1,10 +1,9 @@
 "use client";
-import { useRef } from "react";
 import cx from "classnames";
+import { useRef } from "react";
 import { LAYER_TYPES } from "../constants";
-import { useAddLayer } from "../services/useAddLayer";
+import { useVideoEditorContext } from "../context";
 import { VideoLayerType } from "../types";
-import { type } from "os";
 
 interface AddLayerButtonProps {
   classes?: {
@@ -14,7 +13,7 @@ interface AddLayerButtonProps {
 
 export function AddLayerButton({ classes = {} }: AddLayerButtonProps = {}) {
   const modalRef = useRef(null);
-  const { addLayer } = useAddLayer();
+  const { addLayer } = useVideoEditorContext();
 
   function openModal() {
     (modalRef.current! as HTMLDialogElement).showModal();

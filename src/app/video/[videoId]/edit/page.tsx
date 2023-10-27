@@ -8,7 +8,7 @@ import Link from "next/link";
 import { Home } from "react-feather";
 
 export default function EditVideo() {
-  const { videoState, isLoadingVideo, setVideoState } = useVideoEditorContext();
+  const { videoState, isLoadingVideo } = useVideoEditorContext();
 
   if (isLoadingVideo) {
     return (
@@ -48,11 +48,11 @@ export default function EditVideo() {
             <PlayerBar style="inline" />
           </div>
           <div className="divider"></div>
-          {videoState.layers.map((layer) => (
-            <div className="my-2">
-              <LayerBar key={layer.id} />
-            </div>
-          ))}
+          <div className="my-5">
+            {videoState.layers.map((layer) => (
+              <LayerBar key={layer.id} layer={layer} />
+            ))}
+          </div>
           <div className="divider"></div>
           <AddLayerButton classes={{ button: "w-full mt-2" }} />
         </div>
