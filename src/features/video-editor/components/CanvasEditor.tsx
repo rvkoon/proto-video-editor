@@ -3,12 +3,10 @@ import { useVideoEditorContext } from "../context";
 import { PlayerBar } from "./PlayerBar";
 
 export function CanvasEditor() {
-  const { videoState } = useVideoEditorContext();
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { canvasRef, videoState } = useVideoEditorContext();
 
   useEffect(() => {
-    if (!videoState) return;
-
+    if (!canvasRef || !videoState) return;
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
 

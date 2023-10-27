@@ -8,6 +8,7 @@ const VideoEditorContext = createContext<VideoEditorContextType>({
   videoState: null,
   setVideoState: () => {},
   isLoadingVideo: false,
+  canvasRef: null,
   setSelectedLayer: () => {},
   addLayer: () => {},
   setLayerStartEnd: () => {},

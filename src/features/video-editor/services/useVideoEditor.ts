@@ -1,5 +1,5 @@
 import { LocalStorageService } from "@/services/localstorage";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { DEFAULT_VIDEO_LAYER } from "../constants";
 import { VideoLayerType, VideoState } from "../types";
@@ -7,6 +7,7 @@ import { VideoLayerType, VideoState } from "../types";
 export function useVideoEditor(videoId: string) {
   const [videoState, setVideoState] = useState<VideoState | null>(null);
   const [isLoadingVideo, setIsLoadingVideo] = useState<boolean>(true);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const video = LocalStorageService.get(`video-${videoId}`);
@@ -99,5 +100,6 @@ export function useVideoEditor(videoId: string) {
     addLayer,
     setLayerStartEnd,
     deleteLayer,
+    canvasRef,
   };
 }
