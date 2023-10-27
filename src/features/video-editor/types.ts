@@ -11,6 +11,7 @@ export type VideoSettings = {
   fps: number;
   isPlaying: boolean;
   isEnded: boolean;
+  selectedLayerId: string | null;
 };
 
 export type VideoLayer = {

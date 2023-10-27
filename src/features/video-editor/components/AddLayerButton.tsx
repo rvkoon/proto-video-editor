@@ -27,7 +27,10 @@ export function AddLayerButton({ classes = {} }: AddLayerButtonProps = {}) {
 
   return (
     <>
-      <button className={cx("btn", classes.button)} onClick={openModal}>
+      <button
+        className={cx("btn btn-ghost", classes.button)}
+        onClick={openModal}
+      >
         Add new layer
       </button>
       <dialog ref={modalRef} className="modal">

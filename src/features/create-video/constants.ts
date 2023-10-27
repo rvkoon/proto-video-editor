@@ -14,6 +14,7 @@ export const DEFAULT_VIDEO_STATE: VideoState = {
     fps: 24,
     isPlaying: false,
     isEnded: false,
+    selectedLayerId: null,
   },
   layers: [],
 };

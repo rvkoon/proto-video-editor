@@ -4,8 +4,14 @@ import { useEffect, useState } from "react";
 import RangeSlider from "react-range-slider-input";
 import "react-range-slider-input/dist/style.css";
 import "./LayerBar.css";
+import cx from "classnames";
 
-export function LayerBar() {
+interface LayerBarProps {
+  isSelected?: boolean;
+  sourceImg?: string;
+}
+
+export function LayerBar({ isSelected = false, sourceImg }: LayerBarProps) {
   const [value, setValue] = useState([0, 48]);
   const [startDisplayTime, setStartDisplayTime] = useState<string>("0:0");
   const [endDisplayTime, setEndDisplayTime] = useState<string>("0:0");
@@ -19,7 +25,7 @@ export function LayerBar() {
   }, [value]);
 
   return (
-    <div className="h-[50px] flex items-center gap-4">
+    <div className={cx("h-[50px] flex items-center gap-4")}>
       <RangeSlider
         min={0}
         max={48}

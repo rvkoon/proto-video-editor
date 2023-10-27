@@ -1,22 +1,29 @@
 /* Yellow Range Slider */
 #customSlider {
-  @apply bg-base-300 h-2;
+  @apply bg-base-300 h-10;
 }
 
 #customSlider .range-slider__range {
-  @apply bg-lime-300 h-2;
+  @apply bg-gray-600 h-10;
 }
 
 #customSlider .range-slider__thumb {
-  @apply bg-lime-500;
+  @apply bg-primary;
   transition: transform 0.3s;
-  @apply w-5 h-5;
+  @apply w-4 h-11 rounded-md border-2 border-violet-100 -translate-y-1/2 -translate-x-1/2;
+}
+
+#customSlider .range-slider__thumb:hover {
+  @apply bg-primary;
+  transition: transform 0.3s;
+  @apply w-4 h-12 rounded-md border-2 border-violet-100 -translate-y-1/2 -translate-x-1/2;
 }
 
 #customSlider .range-slider__thumb[data-active] {
   transform: translate(-50%, -50%) scale(1.25);
+  @apply w-4 h-12 rounded-md border-2 border-violet-100 -translate-y-1/2 -translate-x-1/2;
 }
 
 #customSlider .range-slider__range[data-active] {
-  height: 6px;
+  @apply h-10;
 }
