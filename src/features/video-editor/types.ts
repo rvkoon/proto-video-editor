@@ -17,7 +17,7 @@ export type VideoSettings = {
 export type VideoLayer = {
   id: string;
   type: VideoLayerType;
-  image: any;
+  source: any;
   position: {
     x: number;
     y: number;
@@ -41,9 +41,10 @@ export type VideoEditorContextType = {
   isLoadingVideo: boolean;
   canvasRef: React.RefObject<HTMLCanvasElement> | null;
   setSelectedLayer: (layerId: string) => void;
-  addLayer: (type: VideoLayerType) => void;
+  addLayer: (type: VideoLayerType) => string;
   setLayerStartEnd: (layerId: string, startEnd: [number, number]) => void;
   deleteLayer: (layerId: string) => void;
+  setLayerSource: (layerId: string, source: any) => void;
 };
 
 export enum VideoLayerType {

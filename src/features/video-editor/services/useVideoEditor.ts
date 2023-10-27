@@ -57,6 +57,8 @@ export function useVideoEditor(videoId: string) {
 
     setVideoState(nextVideoState);
     _updateStorage(nextVideoState);
+
+    return uuid;
   }
 
   function setLayerStartEnd(layerId: string, [start, end]: [number, number]) {
@@ -70,6 +72,26 @@ export function useVideoEditor(videoId: string) {
             ...layer,
             start,
             end,
+          };
+        }
+        return layer;
+      }),
+    };
+
+    setVideoState(nextVideoState);
+    _updateStorage(nextVideoState);
+  }
+
+  function setLayerSource(layerId: string, source: string) {
+    if (!videoState) return;
+
+    const nextVideoState = {
+      ...videoState,
+      layers: videoState.layers.map((layer) => {
+        if (layer.id === layerId) {
+          return {
+            ...layer,
+            source,
           };
         }
         return layer;
@@ -113,9 +135,16 @@ export function useVideoEditor(videoId: string) {
     );
 
     currentLayers.forEach((layer) => {
-      const { position, size } = layer;
-      ctx.fillStyle = "red";
-      ctx.fillRect(position.x, position.y, size.width, size.height);
+      const {
+        position: { x, y },
+        size: { width, height },
+        source,
+      } = layer;
+      const img = new Image();
+      img.onload = function () {
+        ctx.drawImage(img, x, y, width, height); // Or at whatever offset you like
+      };
+      img.src = source;
     });
   }
 
@@ -128,5 +157,6 @@ export function useVideoEditor(videoId: string) {
     setLayerStartEnd,
     deleteLayer,
     canvasRef,
+    setLayerSource,
   };
 }
